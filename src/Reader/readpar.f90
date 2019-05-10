@@ -731,7 +731,7 @@ CONTAINS
     !Dynamic shear stress arrival output currently only for linear slip weakening friction laws
     IF (OutputMask(11).EQ.1) THEN
         SELECT CASE (EQN%FL)
-               CASE(2,6,13,16,17,29,30,103) !LSW friction law cases
+               CASE(2,6,13,103) !LSW friction law cases
                     !use only if RF_output=1
                     IF (OutputMask(10).EQ.1) THEN
                         ! set 'collecting DS time' to 1
@@ -1020,10 +1020,6 @@ CONTAINS
            CASE(6) ! bimaterial with LSW
              DISC%DynRup%v_star = v_star
              DISC%DynRup%L = L
-           CASE(16) ! SCEC TPV 16/17
-             ! all parameters are defined in input file of INITIAL VALUES
-             DISC%DynRup%inst_healing = 0
-             DISC%DynRup%t_0      = t_0       ! forced rupture decay time
              CONTINUE
            CASE(3,4,7,101,103)
              DISC%DynRup%RS_f0 = RS_f0    ! mu_0, reference friction coefficient

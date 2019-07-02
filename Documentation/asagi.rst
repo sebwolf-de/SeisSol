@@ -23,18 +23,25 @@ compilation of SeisSol in a later step!
 example on SuperMuc
 ~~~~~~~~~~~~~~~~~~~
 
--  load the following modules (order matters!)
+-  load the following modules:
 
 .. code-block:: bash
 
-   module switch mpi.ibm mpi.intel #since the ibm mpi interferes with python mpi
-   module load python/2.7_anaconda_mpi gcc netcdf/mpi cmake
+   module load python/3.5_intel
+   module unload netcdf
+   module load netcdf/mpi
+   module load hdf5/mpi/1.8.18
+   module unload intel
+   module load intel/17.0
+   module load gcc
+   module load cmake
+
 
 -  get the repository
 
 .. code-block:: bash
 
-   git clone https://github.com/TUM-I5/ASAGI.git
+   git clone git@github.com:TUM-I5/ASAGI.git
 
 -  set compiler options:
 
@@ -44,14 +51,21 @@ example on SuperMuc
    export CXX=mpiCC
    export CC=mpicc
 
--  install:
+-  configure:
 
 .. code-block:: bash
 
    mkdir build
    CMAKE_PREFIX_PATH=$NETCDF_BASE #$NETCDF_BASE should be defined
    cd build
-   cmake ../ -DCMAKE_INSTALL_PREFIX=$HOME/<folder-to-ASAGI>/build/
+   ccmake ..
+   
+- check that all paths fit your loaded modules
+- press c to configure, then g to generate and exit
+- make
+
+.. code-block:: bash
+   
    make
    make install
 

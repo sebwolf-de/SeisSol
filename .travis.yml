@@ -1,6 +1,6 @@
 jobs:
    include:
       - stage: SeisSol
-        script: buildSeisSol
+        script: ./.buildSeisSol
       - stage: Documentation
-        script: buildDocumentation
+        script: ./.buildDocumentation
